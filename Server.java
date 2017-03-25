@@ -109,19 +109,7 @@ public class Server
 								//num=clist.length;
 								clist[ii]=clientname;
 								ii++;
-								/*//batabase coding
-									cn=DriverManager.getConnection("Jdbc:Odbc:ClientList");
-									st=cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE); // damn it ,took 1 hr to solve
-									rs=st.executeQuery("SELECT * FROM Clients");
-									rs.moveToInsertRow();
-									
-								rs.updateString("CName",clientname);
-								rs.updateString("CAddress",clientaddress);
-								rs.insertRow();
-								rs.close();
-								st.close();
-								cn.close(); */
-						
+								
 								new Thread(new SocketThread(socket),clientname).start();  // This is a dirty statement,which took whole 1 night to build
 								new Thread(new received(socket),clientname+"1").start();
 							}	
@@ -138,32 +126,7 @@ public class Server
 			{
 				try 
 				{
-				   //System.out.println("error occured");
-				  
-				   /*//to delete all database clientlist
-							cn=DriverManager.getConnection("Jdbc:Odbc:ClientList");
-							st=cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
-							System.out.println("Deleted1");
-							rs=st.executeQuery("Delete * FROM Clients");
-							 System.out.println("Deleted");
-							/*
-							rs=st.executeQuery("SELECT * FROM Clients");
-							
-							while(rs.next())
-							{
-								    String temp=rs.getString(1);
-								    System.out.println("Deleted");
-									PreparedStatement pt1=cn.prepareStatement("Delete from Clients Where CName like '"+temp+"'");
-									ResultSet rs1=pt1.executeQuery();
-									// rs1.close();
-									// pt1.close();
-								
-							}
-							
-							rs.close();
-							st.close();
-							cn.close();
-				   serverSocket.close(); */
+				   
 				} 
 				catch(Exception e) 
 				{
@@ -188,8 +151,6 @@ public class Server
 				
 					try
 					{
-						//System.out.println("Thread transfered received: "+mesg);
-						//System.out.println("Thread name"+Thread.currentThread().getName());
 						DataInputStream instream1=new DataInputStream(socket.getInputStream());
 						DataOutputStream outstream1=new DataOutputStream(socket.getOutputStream());
 						//static boolean reading= true;
@@ -201,22 +162,6 @@ public class Server
 							String msg=instream1.readUTF();
 						if(msg.equals("1")) // for message
 						{
-							//System.out.println("<<<<<<<<<<<<<<<<Message Recieived>>>>>>>>>>>>>"+Thread.currentThread().getName());
-							//	System.out.println(mr);
-							/* cn=DriverManager.getConnection("Jdbc:Odbc:ClientList");
-							st=cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
-							rs=st.executeQuery("SELECT * FROM Clients");
-							System.out.println("point1");
-							Vector v=new Vector();
-							String msg1=null;
-							while(rs.next())
-							{
-								msg1=null;
-								msg1=rs.getString(1);
-								v.addElement(msg1.toString());
-							}
-							*/
-							
 							outstream1.writeUTF("111");  // identifies client that message is receiveing
  							outstream1.writeUTF(""+ii); // it sends the size for loop at client side
 							
@@ -256,18 +201,7 @@ public class Server
 						}
 						if(msg.equals("2")) // for file
 						{
-							/*cn=DriverManager.getConnection("Jdbc:Odbc:ClientList");
-							st=cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
-							rs=st.executeQuery("SELECT * FROM Clients");
-							System.out.println("point1");
-							Vector v=new Vector();
-							String msg1=null;
-							while(rs.next())
-							{
-								msg1=null;
-								msg1=rs.getString(1);
-								v.addElement(msg1.toString());
-							} */
+							
 							outstream1.writeUTF("1111"); // iddentifies client that file receiving
 							outstream1.writeUTF(""+ii); // it sends the size for loop at client side
 							String m1=null;
@@ -277,10 +211,7 @@ public class Server
 								m1=clist[j];
 								outstream1.writeUTF(m1);
 							}
-							/*rs.close();
-							st.close();
-							cn.close();*/
-							//System.out.println("file Point 0");
+							
 							
 							DataInputStream instream222=null;
 							try
@@ -299,9 +230,7 @@ public class Server
 							String tfdes=instream222.readUTF();
 							//System.out.println("file Point 4");
 							
-							//ObjectInputStream ois=new ObjectInputStream(socket.getInputStream());
-							// DataInputStream disfile=new DataInputStream(socket.getInputStream());
-							 //Object tfobject=ois.readObject();
+							
 							  receivedfname=instream222.readUTF();
 							 tfilestring=instream222.readUTF();
 							 //System.out.println("file Point 5");
@@ -329,28 +258,7 @@ public class Server
 						   // System.out.println("disconnection section");
 							DataInputStream instream2=new DataInputStream(socket.getInputStream());
 							String cname=instream2.readUTF();
-							/*cn=DriverManager.getConnection("Jdbc:Odbc:ClientList");
-							st=cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
-							rs=st.executeQuery("SELECT * FROM Clients");
 							
-							while(rs.next())
-							{
-								String temp=rs.getString(1);
-								if(cname.equals(temp))
-								{
-								     
-									 System.out.println("Deleted");
-									PreparedStatement pt1=cn.prepareStatement("Delete from Clients Where CName like '"+cname+"'");
-									ResultSet rs1=pt1.executeQuery();
-									rs1.close();
-									pt1.close();
-								}
-							}
-							
-							rs.close();
-							st.close();
-							cn.close();
-							*/
 							for(int kk=0;kk<ii;kk++)
 							{
 								if(clist[kk].equals(cname))
@@ -371,23 +279,9 @@ public class Server
 								}
 							}
 							
-							/*
-							for(int ik=0;ik<ii;ik++)
-							{
-								for(int jj=ik+1;jj<ii;jj++)
-								{
-									if(clist[ik].compareToIgnoreCase(clist[jj])>0)
-									{
-									  String temp=clist[ik];
-									  clist[ik]=clist[jj];
-									  clist[jj]=temp;
-									}
-								}
-							}
-							ii--; */
 							
 						}
-						//outstream1.writeUTF("Empty"); 
+						
 						} //End of while
 						try
 						{
@@ -420,8 +314,6 @@ public class Server
 				{
 				if(des.equals(Thread.currentThread().getName()))
 				{
-							   // System.out.println("<<<<<<<<<<<<<<<<Message Recieived>>>>>>>>>>>>>");
-							//	System.out.println(mr);
 						
 				
 					try
@@ -451,8 +343,7 @@ public class Server
 					DataOutputStream outstream11=new DataOutputStream(ss.getOutputStream());
 					outstream11.writeUTF("11111");
 				   outstream11.writeUTF(fsender);
-				   //ObjectOutputStream oos=new ObjectOutputStream(ss.getOutputStream());
-				   //oos.writeObject(fobject);
+				
 				    outstream11.writeUTF(receivedfname);
 				   outstream11.writeUTF(filestring);
 				   //System.out.println("-----------------------------------");
