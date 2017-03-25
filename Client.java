@@ -202,24 +202,6 @@ class Sendfile extends JFrame implements ActionListener
 			fdtemp.setVisible(true);
 		    String b=fdtemp.getDirectory()+fdtemp.getFile();
 			sfname=fdtemp.getFile();
-		
-			
-			/*
-			System.out.println(ss);	
-			System.out.println(b);	
-			try
-			{
-				fis=new FileInputStream(fdtemp.getFile());
-				System.out.println("file Point 1");
-			} 
-			catch(IOException/*FileNotFoundException fnf)
-			{
-			}
-			*/
-
-			
-
-			// new coding
 			try
 			{
 			try{
@@ -251,11 +233,7 @@ class Sendfile extends JFrame implements ActionListener
 			outstream5.writeUTF(cliname1); // sender name
 			String a=chclientlist1.getSelectedItem();
 			outstream5.writeUTF(a); //destination
-			//System.out.println("file Point 3");
-			//oos=new ObjectOutputStream(clientsocket2.getOutputStream());
-			//System.out.println("file Point 4");
-			//oos.writeObject(fis);
-			//System.out.println(sfname);
+			
 			outstream5.writeUTF(sfname);
 			
 			//System.out.println("file Point 5");
@@ -324,10 +302,7 @@ class ReceivedFile extends JFrame implements ActionListener
 	{
 		if(aevnt.getSource()==save)
 		{
-			//ObjectInputStream fis=new ObjectInputStream(o);
-			//fd.setFile(fd.readObject(fis));
-			//fd.setFile(o.toString());
-			//File f=new File();
+			
 			fd.setFile(rfname);
 			fd.setVisible(true);
 			//fd.readObject(o);
@@ -417,13 +392,7 @@ public class Client extends JFrame implements ActionListener
    JLabel image=new JLabel();
 	image.setIcon(new ImageIcon("./back.jpg"));
 	image.setBounds(0,0,screenSize.width,screenSize.height);
-	//add(image);
-     /*printt p=new printt();
-     t=new Thread();
-	 t.start();
-	 */
-	 //this.setSize(1000,500);
-	 //this.setVisible(true);
+	
 	new Thread(new printt()).start();
 	
    }
@@ -433,9 +402,7 @@ public class Client extends JFrame implements ActionListener
 	   {
 			while(true)
 			{
-			//System.out.println("IN thread");
-			/*String mf=s.substring(0,1); //first character
-			/*String mm=s.substring(1,s.length()); //rest characters*/
+			
 			try
 			{
 			tt.sleep(100);
@@ -469,10 +436,7 @@ public class Client extends JFrame implements ActionListener
 	public void UI()
 	{
 	    Container c=getContentPane();
-		//c.setLayout(new GridBagLayout());
-		//c.setLayout(new GridLayout(1,1));
-		//GridBagConstraints gbc=new GridBagConstraints();
-		//c.setBackgroundColor(new Color(255,255,255));
+		
 		c.setLayout(null);
 		c.setFont(new Font("Ariel",40,40));
 		JLabel portlbl=new JLabel("Server Port:",Label.RIGHT);
