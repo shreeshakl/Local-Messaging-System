@@ -10,10 +10,10 @@ public class Server
     private static boolean acceptMore = true;
 	
 	// database declaration
-	Class cl;
-	Connection cn=null;
-	ResultSet rs;
-	Statement st=null;
+// 	Class cl;
+// 	Connection cn=null;
+// 	ResultSet rs;
+// 	Statement st=null;
 	InetAddress a;
 	private static String mr=null;
 	private static String des="";
@@ -55,14 +55,14 @@ public class Server
 			   System.out.println("server is listining at port number "+serverSocket.getLocalPort()); 
                
 			   //batabase
-			    try
-				{
-					cl=Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-				}
-				catch(ClassNotFoundException cnf)
-				{
-				 //  System.out.println("error occured1");
-				}
+// 			    try
+// 				{
+// 					cl=Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+// 				}
+// 				catch(ClassNotFoundException cnf)
+// 				{
+// 				 //  System.out.println("error occured1");
+// 				}
 					
 					while(acceptMore) 
 					{
@@ -101,7 +101,7 @@ public class Server
 								InetAddress adn=InetAddress.getLocalHost();
 								clientaddress=adn.toString();
 								System.out.println(clientname+" : "+clientaddress);
-								rs=null;
+							//	rs=null;
 								
 								
 								Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
